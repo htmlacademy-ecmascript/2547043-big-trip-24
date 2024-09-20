@@ -1,5 +1,5 @@
-import FiltersFormView from './view/filters-form-view';
-import { render } from './render';
+import FiltersFormView from '../view/filters-form-view';
+import { render } from '../render';
 
 export default class FiltersPresenter {
   constructor(filtersContainer) {

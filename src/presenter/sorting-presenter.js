@@ -1,5 +1,5 @@
-import SortingFormView from './view/sorting-form-view';
-import { render } from './render';
+import SortingFormView from '../view/sorting-form-view';
+import { render } from '../render';
 
 export default class SortingPresenter {
   constructor(sortingContainer) {

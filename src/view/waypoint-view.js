@@ -38,7 +38,8 @@ function createWaypointTemplate() {
       <span class="visually-hidden">Open event</span>
     </button>
   </div>
-</li>`;
+</li>
+`;
 }
 
 export default class WaypointView {

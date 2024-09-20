@@ -1,6 +1,6 @@
-import FiltersPresenter from './filters-presenter';
-import ListPresenter from './list-presenter';
-import SortingPresenter from './sorting-presenter';
+import FiltersPresenter from './presenter/filters-presenter';
+import ListPresenter from './presenter/list-presenter';
+import SortingPresenter from './presenter/sorting-presenter';
 
 const filtersContainer = document.querySelector('.trip-controls__filters');
 const listContainer = document.querySelector('.trip-events');

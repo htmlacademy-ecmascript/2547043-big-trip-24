@@ -1,4 +1,4 @@
-import FiltersFormView from '../view/filters-form-view';
+import FiltersView from '../view/filters-view';
 import { render } from '../render';
 
 export default class FiltersPresenter {
@@ -6,10 +6,10 @@ export default class FiltersPresenter {
     this.container = filtersContainer;
   }
 
-  filtersForm = new FiltersFormView;
+  filters = new FiltersView;
 
   init() {
-    render(this.filtersForm, this.container);
+    render(this.filters, this.container);
   }
 
 }

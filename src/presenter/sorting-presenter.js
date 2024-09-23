@@ -1,4 +1,4 @@
-import SortingFormView from '../view/sorting-form-view';
+import SortingView from '../view/sorting-view';
 import { render } from '../render';
 
 export default class SortingPresenter {
@@ -7,7 +7,7 @@ export default class SortingPresenter {
   }
 
   init() {
-    render(new SortingFormView, this.container);
+    render(new SortingView, this.container);
   }
 
 }

@@ -1,7 +1,7 @@
-import WaypointView from '../view/waypoint-view';
+import PointView from '../view/point-view';
 import ListView from '../view/list-view';
-import EditingFormView from '../view/editing-form-view';
-import CreatingFormView from '../view/creating-form-view';
+import PointEditingView from '../view/point-editing-view';
+import PointCreatingView from '../view/point-creating-view';
 
 import { render, RenderPosition } from '../render';
 
@@ -11,15 +11,18 @@ export default class ListPresenter {
   }
 
   listComponent = new ListView;
-  waypointCreatingComponent = new WaypointView;
-  waypointEditingComponent = new WaypointView;
+  pointCreatingComponent = new PointView;
+  pointEditingComponent = new PointView;
 
   init() {
     render(this.listComponent, this.container);
-    render(this.waypointCreatingComponent, this.listComponent.getElement());
-    render(new CreatingFormView, this.waypointCreatingComponent.getElement(), RenderPosition.AFTERBEGIN);
-    render(this.waypointEditingComponent, this.listComponent.getElement());
-    render(new EditingFormView, this.waypointEditingComponent.getElement(), RenderPosition.AFTERBEGIN);
-    render(new WaypointView, this.listComponent.getElement());
+
+    render(this.pointCreatingComponent, this.listComponent.getElement());
+    render(new PointCreatingView, this.pointCreatingComponent.getElement(), RenderPosition.AFTERBEGIN);
+
+    render(this.pointEditingComponent, this.listComponent.getElement());
+    render(new PointEditingView, this.pointEditingComponent.getElement(), RenderPosition.AFTERBEGIN);
+
+    render(new PointView, this.listComponent.getElement());
   }
 }

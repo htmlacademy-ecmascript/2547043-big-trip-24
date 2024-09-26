@@ -2,6 +2,7 @@ import PointView from '../view/point-view';
 import ListView from '../view/list-view';
 import FiltersView from '../view/filters-view';
 import SortingView from '../view/sorting-view';
+import PointEditingView from '../view/point-editing-view';
 
 import { render, /*RenderPosition*/ } from '../render';
 
@@ -29,28 +30,18 @@ export default class GlobalPresenter {
     for(let i = 0; i < this.globalPoints.length; i++) {
       const currentPoint = this.globalPoints[i];
       const currentPointOffers = this.pointsModel.getOffersById(currentPoint);
+      const currentPointTypeOffers = this.pointsModel.getOffersByType(currentPoint);
+      const allDestinations = this.pointsModel.getDestinations();
       const currentPointDestination = this.pointsModel.getDestinationById(currentPoint.id);
-      render(new PointView(
-        {
+      if(i === 0) {
+        render(new PointEditingView({ point: currentPoint, pointDestination: currentPointDestination, pointTypeOffers: currentPointTypeOffers, allDestinations: allDestinations}), this.listComponent.getElement());
+      } else {
+        render(new PointView({
           point: currentPoint,
           pointOffers: currentPointOffers,
           pointIdDestination: currentPointDestination
-        }
-      ), this.listComponent.getElement());
+        }), this.listComponent.getElement());
+      }
     }
-
-    // render(this.pointCreatingComponent, this.listComponent.getElement());
-    // render(new PointCreatingView, this.pointCreatingComponent.getElement(), RenderPosition.AFTERBEGIN);
-
-    // render(this.pointEditingComponent, this.listComponent.getElement());
-    // render(new PointEditingView, this.pointEditingComponent.getElement(), RenderPosition.AFTERBEGIN);
-
-    // import PointEditingView from '../view/point-editing-view';
-    // import PointCreatingView from '../view/point-creating-view';
-
-    //pointCreatingComponent = new PointView;
-    //pointEditingComponent = new PointView;
-
-
   }
 }

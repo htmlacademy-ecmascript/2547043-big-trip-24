@@ -10,7 +10,7 @@ const mockPoints = [
     dateTo: '2019-07-11T11:22:13.375Z',
     destination:`${getRandomInteger(1, 5)}`,
     isFavorite: false,
-    offers: Array.from({length: getRandomInteger(1, 4)}, () => `${getRandomInteger(1,4)}`),
+    offers: ['1']
   },
   {
     id: '2',
@@ -20,7 +20,7 @@ const mockPoints = [
     dateTo: '2019-07-11T11:22:13.375Z',
     destination:`${getRandomInteger(1, 5)}`,
     isFavorite: false,
-    offers: Array.from({length: getRandomInteger(1, 4)}, () => `${getRandomInteger(1,4)}`),
+    offers: ['1']
   },
   {
     id: '3',
@@ -30,7 +30,7 @@ const mockPoints = [
     dateTo: '2019-07-11T11:22:13.375Z',
     destination:`${getRandomInteger(1, 5)}`,
     isFavorite: false,
-    offers: Array.from({length: getRandomInteger(1, 4)}, () => `${getRandomInteger(1,4)}`),
+    offers: ['1']
   },
   {
     id: '4',
@@ -40,7 +40,7 @@ const mockPoints = [
     dateTo: '2019-07-11T11:22:13.375Z',
     destination:`${getRandomInteger(1, 5)}`,
     isFavorite: false,
-    offers: Array.from({length: getRandomInteger(1, 4)}, () => `${getRandomInteger(1,4)}`),
+    offers: ['1']
   },
   {
     id: '5',
@@ -50,7 +50,7 @@ const mockPoints = [
     dateTo: '2019-07-11T11:22:13.375Z',
     destination:`${getRandomInteger(1, 5)}`,
     isFavorite: false,
-    offers: Array.from({length: getRandomInteger(1, 4)}, () => `${getRandomInteger(1,4)}`),
+    offers: ['1']
   }
 ];
 

@@ -1,7 +1,5 @@
 import dayjs from 'dayjs';
 
-const DATE_FORMAT = '';
-
 function getRandomArrayElement(items) {
   return items[Math.floor(Math.random() * items.length)];
 }
@@ -16,7 +14,12 @@ function getRandomSentenceFromText (text) {
   return getRandomArrayElement(text.split('.'));
 }
 
-function humanizePointDate (date) {
+function humanizePointDate (date, DATE_FORMAT) {
   return date ? dayjs(date).format(DATE_FORMAT) : '';
 }
-export { getRandomArrayElement, getRandomInteger, getRandomSentenceFromText };
+
+function getTimeDiff(/*dateFrom, dateTo*/) {
+  return 'WIP';
+}
+
+export { getRandomArrayElement, getRandomInteger, getRandomSentenceFromText, humanizePointDate, getTimeDiff };

@@ -15,9 +15,9 @@ export default class GlobalPresenter {
     this.pointsModel = pointsModel;
   }
 
-  listComponent = new ListView;
-  filtersComponent = new FiltersView;
-  sortingComponent = new SortingView;
+  listComponent = new ListView();
+  filtersComponent = new FiltersView();
+  sortingComponent = new SortingView();
 
   init() {
 
@@ -33,15 +33,26 @@ export default class GlobalPresenter {
       const currentPointTypeOffers = this.pointsModel.getOffersByType(currentPoint);
       const allDestinations = this.pointsModel.getDestinations();
       const currentPointDestination = this.pointsModel.getDestinationById(currentPoint.id);
+
+      const pointEditingComponent = new PointEditingView({
+        point: currentPoint,
+        pointDestination: currentPointDestination,
+        pointTypeOffers: currentPointTypeOffers,
+        allDestinations: allDestinations
+      });
+
+      const pointComponent = new PointView({
+        point: currentPoint,
+        pointOffers: currentPointOffers,
+        pointIdDestination: currentPointDestination
+      });
+
       if(i === 0) {
-        render(new PointEditingView({ point: currentPoint, pointDestination: currentPointDestination, pointTypeOffers: currentPointTypeOffers, allDestinations: allDestinations}), this.listComponent.getElement());
+        render(pointEditingComponent, this.listComponent.getElement());
       } else {
-        render(new PointView({
-          point: currentPoint,
-          pointOffers: currentPointOffers,
-          pointIdDestination: currentPointDestination
-        }), this.listComponent.getElement());
+        render(pointComponent, this.listComponent.getElement());
       }
+
     }
   }
 }

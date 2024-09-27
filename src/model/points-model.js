@@ -19,15 +19,15 @@ export default class PointsModel {
 
   getOffersByType(point) {
     const foundOffersItem = this.getOffers().find((item) => item.type === point.type);
-    return foundOffersItem === undefined ? 'none' : foundOffersItem.offers;
+    return foundOffersItem === undefined ? [] : foundOffersItem.offers;
   }
 
   getOffersById(point) {
     const allTypeOffers = this.getOffersByType(point);
-    if(allTypeOffers !== 'none' && point.offers.length > 0) {
+    if(allTypeOffers.length > 0 && point.offers.length > 0) {
       return point.offers.map((offerId) => allTypeOffers.find((item) => item.id === offerId));
     } else {
-      return 'none';
+      return [];
     }
   }
 

@@ -12,8 +12,12 @@ function createPointOfferTemplate(title, price) {
 }
 
 function createPointOffers(pointOffers) {
-  if (pointOffers !== 'none') {
-    return pointOffers.map((offer) => createPointOfferTemplate(offer.title, offer.price)).join('');
+  if (pointOffers.length > 0) {
+    return pointOffers.map((offer) => {
+      if(offer) {
+        return createPointOfferTemplate(offer.title, offer.price);
+      }
+    }).join('');
   } else {
     return '';
   }

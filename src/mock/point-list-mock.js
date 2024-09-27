@@ -10,7 +10,7 @@ const mockPoints = [
     dateTo: '2019-07-11T11:22:13.375Z',
     destination:`${getRandomInteger(1, 5)}`,
     isFavorite: false,
-    offers: ['1']
+    offers: ['1', '2']
   },
   {
     id: '2',
@@ -20,7 +20,7 @@ const mockPoints = [
     dateTo: '2019-07-11T11:22:13.375Z',
     destination:`${getRandomInteger(1, 5)}`,
     isFavorite: false,
-    offers: ['1']
+    offers: ['2']
   },
   {
     id: '3',
@@ -50,7 +50,7 @@ const mockPoints = [
     dateTo: '2019-07-11T11:22:13.375Z',
     destination:`${getRandomInteger(1, 5)}`,
     isFavorite: false,
-    offers: ['1']
+    offers: ['1', '2']
   }
 ];
 

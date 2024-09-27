@@ -24,11 +24,7 @@ export default class PointsModel {
 
   getOffersById(point) {
     const allTypeOffers = this.getOffersByType(point);
-    if(allTypeOffers.length > 0 && point.offers.length > 0) {
-      return point.offers.map((offerId) => allTypeOffers.find((item) => item.id === offerId));
-    } else {
-      return [];
-    }
+    return point.offers.map((offerId) => allTypeOffers.find((item) => item.id === offerId));
   }
 
   getDestinations() {

@@ -4,7 +4,7 @@ import FiltersView from '../view/filters-view';
 import SortingView from '../view/sorting-view';
 import PointEditingView from '../view/point-editing-view';
 
-import { render, /*RenderPosition*/ } from '../render';
+import { render } from '../framework/render';
 
 
 export default class GlobalPresenter {
@@ -48,9 +48,9 @@ export default class GlobalPresenter {
       });
 
       if(i === 0) {
-        render(pointEditingComponent, this.listComponent.getElement());
+        render(pointEditingComponent, this.listComponent.element);
       } else {
-        render(pointComponent, this.listComponent.getElement());
+        render(pointComponent, this.listComponent.element);
       }
 
     }

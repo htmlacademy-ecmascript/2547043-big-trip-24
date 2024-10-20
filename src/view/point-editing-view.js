@@ -1,6 +1,6 @@
-import { createElement } from '../render';
 import { humanizePointDate } from '../utils';
 import { POINT_TYPES } from '../const';
+import AbstractView from '../framework/view/abstract-view';
 
 function createTypeTemplate(type, isChecked) {
   const typeName = type[0].toUpperCase() + type.slice(1);
@@ -55,7 +55,7 @@ function createOffersList (pointOffersIds, pointTypeOffers) {
 }
 
 function createPointEditingTemplate(point, pointDestination, pointTypeOffers, allDeestinations) {
-  const { basePrice, type, dateFrom, dateTo} = point;
+  const { basePrice, type, dateFrom, dateTo } = point;
   const { name, description } = pointDestination;
   const typeName = type[0].toUpperCase() + type.slice(1);
   return `
@@ -129,26 +129,16 @@ function createPointEditingTemplate(point, pointDestination, pointTypeOffers, al
 `;
 }
 
-export default class PointEditingView {
+export default class PointEditingView extends AbstractView {
   constructor({point, pointDestination, pointTypeOffers, allDestinations}) {
+    super();
     this.point = point;
     this.pointDestination = pointDestination;
     this.pointTypeOffers = pointTypeOffers;
     this.allDestinations = allDestinations;
   }
 
-  getTemplate() {
+  get template() {
     return createPointEditingTemplate(this.point, this.pointDestination, this.pointTypeOffers, this.allDestinations);
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
   }
 }

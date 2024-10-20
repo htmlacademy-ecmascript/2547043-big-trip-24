@@ -1,5 +1,5 @@
-import { createElement } from '../render';
 import { humanizePointDate, getTimeDiff } from '../utils';
+import AbstractView from '../framework/view/abstract-view';
 
 function createPointOfferTemplate(title, price) {
   return `
@@ -24,7 +24,7 @@ function createPointOffers(pointOffers) {
 }
 
 function createPointTemplate(point, pointOffers, pointIdDestination) {
-  const { basePrice, type, dateFrom, dateTo, isFavorite} = point;
+  const { basePrice, type, dateFrom, dateTo, isFavorite } = point;
   const { name } = pointIdDestination;
   const typeName = type[0].toUpperCase() + type.slice(1);
   const favoriteClassName = isFavorite ? 'event__favorite-btn--active' : '';
@@ -66,25 +66,15 @@ function createPointTemplate(point, pointOffers, pointIdDestination) {
 `;
 }
 
-export default class PointView {
+export default class PointView extends AbstractView {
   constructor({point, pointOffers, pointIdDestination}) {
+    super();
     this.point = point;
     this.pointOffers = pointOffers;
     this.pointIdDestination = pointIdDestination;
   }
 
-  getTemplate() {
+  get template() {
     return createPointTemplate(this.point, this.pointOffers, this.pointIdDestination);
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
   }
 }

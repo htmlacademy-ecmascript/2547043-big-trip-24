@@ -8,31 +8,37 @@ import { render } from '../framework/render';
 
 
 export default class GlobalPresenter {
+  #listContainer;
+  #filtersContainer;
+  #sortingContainer;
+  #pointsModel;
+
+  #globalPoints;
+
   constructor({listContainer, sortingContainer, filtersContainer, pointsModel}) {
-    this.listContainer = listContainer;
-    this.filtersContainer = filtersContainer;
-    this.sortingContainer = sortingContainer;
-    this.pointsModel = pointsModel;
+    this.#listContainer = listContainer;
+    this.#filtersContainer = filtersContainer;
+    this.#sortingContainer = sortingContainer;
+    this.#pointsModel = pointsModel;
   }
 
-  listComponent = new ListView();
-  filtersComponent = new FiltersView();
-  sortingComponent = new SortingView();
+  #listComponent = new ListView();
+  #filtersComponent = new FiltersView();
+  #sortingComponent = new SortingView();
 
   init() {
+    this.#globalPoints = [...this.#pointsModel.points];
 
-    this.globalPoints = [...this.pointsModel.getPoints()];
+    render(this.#filtersComponent, this.#filtersContainer);
+    render(this.#sortingComponent, this.#sortingContainer);
+    render(this.#listComponent, this.#listContainer);
 
-    render(this.filtersComponent, this.filtersContainer);
-    render(this.sortingComponent, this.sortingContainer);
-    render(this.listComponent, this.listContainer);
-
-    for(let i = 0; i < this.globalPoints.length; i++) {
-      const currentPoint = this.globalPoints[i];
-      const currentPointOffers = this.pointsModel.getOffersById(currentPoint);
-      const currentPointTypeOffers = this.pointsModel.getOffersByType(currentPoint);
-      const allDestinations = this.pointsModel.getDestinations();
-      const currentPointDestination = this.pointsModel.getDestinationById(currentPoint.id);
+    for(let i = 0; i < this.#globalPoints.length; i++) {
+      const currentPoint = this.#globalPoints[i];
+      const currentPointOffers = this.#pointsModel.getOffersById(currentPoint);
+      const currentPointTypeOffers = this.#pointsModel.getOffersByType(currentPoint);
+      const allDestinations = this.#pointsModel.destinations;
+      const currentPointDestination = this.#pointsModel.getDestinationById(currentPoint.id);
 
       const pointEditingComponent = new PointEditingView({
         point: currentPoint,
@@ -48,9 +54,9 @@ export default class GlobalPresenter {
       });
 
       if(i === 0) {
-        render(pointEditingComponent, this.listComponent.element);
+        render(pointEditingComponent, this.#listComponent.element);
       } else {
-        render(pointComponent, this.listComponent.element);
+        render(pointComponent, this.#listComponent.element);
       }
 
     }

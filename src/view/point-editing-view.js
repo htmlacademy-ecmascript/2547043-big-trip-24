@@ -130,15 +130,20 @@ function createPointEditingTemplate(point, pointDestination, pointTypeOffers, al
 }
 
 export default class PointEditingView extends AbstractView {
+  #point;
+  #pointDestination;
+  #pointTypeOffers;
+  #destinations;
+
   constructor({point, pointDestination, pointTypeOffers, allDestinations}) {
     super();
-    this.point = point;
-    this.pointDestination = pointDestination;
-    this.pointTypeOffers = pointTypeOffers;
-    this.allDestinations = allDestinations;
+    this.#point = point;
+    this.#pointDestination = pointDestination;
+    this.#pointTypeOffers = pointTypeOffers;
+    this.#destinations = allDestinations;
   }
 
   get template() {
-    return createPointEditingTemplate(this.point, this.pointDestination, this.pointTypeOffers, this.allDestinations);
+    return createPointEditingTemplate(this.#point, this.#pointDestination, this.#pointTypeOffers, this.#destinations);
   }
 }

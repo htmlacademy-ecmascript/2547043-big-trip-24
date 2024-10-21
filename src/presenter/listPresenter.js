@@ -1,7 +1,5 @@
 import PointView from '../view/point-view';
 import ListView from '../view/list-view';
-import FiltersView from '../view/filters-view';
-import SortingView from '../view/sorting-view';
 import PointEditView from '../view/point-edit-view';
 
 import { render, replace } from '../framework/render';
@@ -10,22 +8,16 @@ import NoPointView from '../view/no-point-view';
 
 export default class ListPresenter {
   #listContainer;
-  #filtersContainer;
-  #sortingContainer;
   #pointsModel;
 
   #listPoints;
 
-  constructor({listContainer, sortingContainer, filtersContainer, pointsModel}) {
+  constructor({listContainer, pointsModel}) {
     this.#listContainer = listContainer;
-    this.#filtersContainer = filtersContainer;
-    this.#sortingContainer = sortingContainer;
     this.#pointsModel = pointsModel;
   }
 
   #listComponent = new ListView();
-  #filtersComponent = new FiltersView();
-  #sortingComponent = new SortingView();
 
   init() {
     this.#listPoints = [...this.#pointsModel.points];
@@ -71,8 +63,6 @@ export default class ListPresenter {
   }
 
   #renderList () {
-    render(this.#filtersComponent, this.#filtersContainer);
-    render(this.#sortingComponent, this.#sortingContainer);
     render(this.#listComponent, this.#listContainer);
 
     if (this.#listPoints.length === 0) {

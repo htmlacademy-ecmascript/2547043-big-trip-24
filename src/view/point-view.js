@@ -1,5 +1,5 @@
-import { createElement } from '../render';
-import { humanizePointDate, getTimeDiff } from '../utils';
+import { humanizePointDate, getTimeDiff } from '../../utils/point';
+import AbstractView from '../framework/view/abstract-view';
 
 function createPointOfferTemplate(title, price) {
   return `
@@ -23,9 +23,9 @@ function createPointOffers(pointOffers) {
   }
 }
 
-function createPointTemplate(point, pointOffers, pointIdDestination) {
-  const { basePrice, type, dateFrom, dateTo, isFavorite} = point;
-  const { name } = pointIdDestination;
+function createPointTemplate(point, pointOffers, pointDestination) {
+  const { basePrice, type, dateFrom, dateTo, isFavorite } = point;
+  const { name } = pointDestination;
   const typeName = type[0].toUpperCase() + type.slice(1);
   const favoriteClassName = isFavorite ? 'event__favorite-btn--active' : '';
 
@@ -66,25 +66,29 @@ function createPointTemplate(point, pointOffers, pointIdDestination) {
 `;
 }
 
-export default class PointView {
-  constructor({point, pointOffers, pointIdDestination}) {
-    this.point = point;
-    this.pointOffers = pointOffers;
-    this.pointIdDestination = pointIdDestination;
+export default class PointView extends AbstractView {
+  #point;
+  #pointOffers;
+  #pointDestination;
+
+  #handleEditClick;
+
+  constructor({point, pointOffers, pointDestination, onEditClick}) {
+    super();
+    this.#point = point;
+    this.#pointOffers = pointOffers;
+    this.#pointDestination = pointDestination;
+    this.#handleEditClick = onEditClick;
+    this.element.querySelector('.event__rollup-btn')
+      .addEventListener('click', this.#editClickHandler);
   }
 
-  getTemplate() {
-    return createPointTemplate(this.point, this.pointOffers, this.pointIdDestination);
+  get template() {
+    return createPointTemplate(this.#point, this.#pointOffers, this.#pointDestination);
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
-  }
+  #editClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleEditClick();
+  };
 }

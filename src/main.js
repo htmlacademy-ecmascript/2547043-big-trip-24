@@ -1,19 +1,13 @@
-import GlobalPresenter from './presenter/globalPresenter';
+import ListPresenter from './presenter/listPresenter';
 import PointsModel from './model/points-model';
 
-const filtersContainer = document.querySelector('.trip-controls__filters');
-const listContainer = document.querySelector('.trip-events');
-const sortingContainer = document.querySelector('.trip-events');
-
-const pointsModel = new PointsModel();
-
-const globalPresenter = new GlobalPresenter(
+const listPresenter = new ListPresenter(
   {
-    filtersContainer: filtersContainer,
-    listContainer: listContainer,
-    sortingContainer: sortingContainer,
-    pointsModel: pointsModel
+    filtersContainer: document.querySelector('.trip-controls__filters'),
+    listContainer: document.querySelector('.trip-events'),
+    sortingContainer: document.querySelector('.trip-events'),
+    pointsModel: new PointsModel()
   }
 );
 
-globalPresenter.init();
+listPresenter.init();

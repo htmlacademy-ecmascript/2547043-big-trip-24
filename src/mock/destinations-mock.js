@@ -1,5 +1,5 @@
 import { CITIES, DESCRIPTION_TEXT } from '../const';
-import { getRandomArrayElement, getRandomInteger, getRandomSentenceFromText } from '../utils';
+import { getRandomArrayElement, getRandomInteger, getRandomSentenceFromText } from '../../utils/common';
 
 const mockDestinations = [
   {

@@ -1,5 +1,5 @@
 import { POINT_TYPES } from '../const';
-import { getRandomInteger, getRandomArrayElement } from '../utils';
+import { getRandomInteger, getRandomArrayElement } from '../../utils/common';
 
 const mockPoints = [
   {

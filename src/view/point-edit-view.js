@@ -1,4 +1,4 @@
-import { humanizePointDate } from '../utils';
+import { humanizePointDate } from '../../utils/point';
 import { POINT_TYPES } from '../const';
 import AbstractView from '../framework/view/abstract-view';
 
@@ -54,7 +54,7 @@ function createOffersList (pointOffersIds, pointTypeOffers) {
   }
 }
 
-function createPointEditingTemplate(point, pointDestination, pointTypeOffers, allDeestinations) {
+function createPointEditTemplate(point, pointDestination, pointTypeOffers, allDeestinations) {
   const { basePrice, type, dateFrom, dateTo } = point;
   const { name, description } = pointDestination;
   const typeName = type[0].toUpperCase() + type.slice(1);
@@ -129,21 +129,40 @@ function createPointEditingTemplate(point, pointDestination, pointTypeOffers, al
 `;
 }
 
-export default class PointEditingView extends AbstractView {
+export default class PointEditView extends AbstractView {
   #point;
   #pointDestination;
   #pointTypeOffers;
   #destinations;
 
-  constructor({point, pointDestination, pointTypeOffers, allDestinations}) {
+  #handleFormSubmit;
+  #handleRollupClick;
+
+  constructor({point, pointDestination, pointTypeOffers, allDestinations, onFormSubmit, onRollupClick}) {
     super();
     this.#point = point;
     this.#pointDestination = pointDestination;
     this.#pointTypeOffers = pointTypeOffers;
     this.#destinations = allDestinations;
+    this.#handleFormSubmit = onFormSubmit;
+    this.#handleRollupClick = onRollupClick;
+    this.element.querySelector('form')
+      .addEventListener('submit', this.#formSubmitHandler);
+    this.element.querySelector('.event__rollup-btn')
+      .addEventListener('click', this.#rollupClickHandler);
   }
 
   get template() {
-    return createPointEditingTemplate(this.#point, this.#pointDestination, this.#pointTypeOffers, this.#destinations);
+    return createPointEditTemplate(this.#point, this.#pointDestination, this.#pointTypeOffers, this.#destinations);
   }
+
+  #formSubmitHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleFormSubmit();
+  };
+
+  #rollupClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleRollupClick();
+  };
 }
